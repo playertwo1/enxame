@@ -1,0 +1,11 @@
+# Ignored files
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+.idea/
+.vscode/
+scratch/
+build/
+dist/
+node_modules/
