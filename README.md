@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/hero-banner.jpg" alt="Enxame Hero Banner" width="100%" style="border-radius: 8px;" />
+</p>
+
 # Enxame 🐝
 
 > **Framework de Orquestração Multi-Agente Hiper-Econômico e Concorrente para Antigravity, Gemini CLI e Claude Code.**  
@@ -34,6 +38,10 @@ O design do Enxame é fundamentado em quatro pilares da literatura e engenharia 
 ---
 
 ## 📐 Arquitetura do Fluxo
+
+<p align="center">
+  <img src="assets/architecture.jpg" alt="Enxame Architecture Pipeline 3D" width="100%" style="border-radius: 8px;" />
+</p>
 
 ```mermaid
 flowchart TD
