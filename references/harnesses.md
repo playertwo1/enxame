@@ -13,6 +13,16 @@ O skill fornece procedimento e templates; instalar os arquivos **não** valida a
 
 Use **econômico** para trabalho mecânico e escopo pequeno; **intermediário** para maker e revisão independentes; **forte** apenas para raciocínio difícil, risco alto ou síntese ampla. Esses aliases são relativos ao catálogo e controles do harness: escolha o equivalente mais barato que cumpra a tarefa. Registre no resultado o modelo realmente usado e o esforço efetivo (ou `não exposto`); não afirme alias executado quando o harness não oferece controle observável.
 
+Mapeamento inicial, a confirmar no catálogo da execução atual:
+
+| Alias | Claude Code (`Agent`: `model`, `effort`) | Antigravity / Gemini | Codex |
+|---|---|---|---|
+| econômico | `haiku`, `low`/`medium` | Flash, thinking baixo | modelo mini, reasoning `low` |
+| intermediário | `sonnet`, `medium`/`high` | Flash, thinking alto | modelo padrão, reasoning `medium` |
+| forte | `opus`, `high` | Pro, thinking alto | modelo padrão ou maior, reasoning `high` |
+
+Só a coluna do Claude Code foi observada diretamente: a ferramenta `Agent` aceita `model` e `effort` por despacho. Nas demais, o controle por subagente depende da versão do host; sem controle observável, registre `não exposto`. Use o coordenador forte como consultor antes de trocar o worker de modelo (veja a escada em [routing.md](routing.md)).
+
 Mantenha limites de concorrência e circuit breaker do `SKILL.md`. Delegação falhou ou não está disponível? Faça o trabalho sem agentes e registre `delegação: direta`.
 
 ## Perfil efetivo do Hermes

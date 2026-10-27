@@ -108,7 +108,7 @@ São quatro escolhas independentes: **delegar**, **selecionar modelo**, **defini
 
 Mais esforço não equivale automaticamente a um modelo maior, e os níveis não são universais entre provedores. Não há obrigação de percorrer todas as etapas da escada. Falta de contexto exige informação; erro de ambiente exige diagnóstico. Uma quota excedida não se resolve aumentando raciocínio.
 
-Após uma reprovação, permita um reparo no mesmo executor. Se a falha persistir, interrompa a repetição e escolha uma escalada explícita ou reporte o impedimento. Esgotar tentativas não autoriza aprovar um defeito. Veja a [matriz completa](references/routing.md).
+Após uma reprovação, permita um reparo no mesmo executor. Se a falha persistir, suba a escada: mais esforço, consulta curta ao coordenador, modelo maior e, por fim, `BLOCKED`. Só falha objetiva sobe um degrau; quando o escopo é incerto, um worker econômico explora primeiro e a rota é escolhida pelo que ele encontrou. Esgotar tentativas não autoriza aprovar um defeito. Veja a [matriz, a escada e o contrato de despacho](references/routing.md) e o [mapa por harness](references/harnesses.md).
 
 ```mermaid
 flowchart TD
@@ -198,7 +198,7 @@ TMLR e Nature Machine Intelligence são periódicos; ICLR é uma conferência. R
 
 Esta versão não publica uma porcentagem de economia ou ganho de velocidade validada. Compiladores e testes podem evitar chamadas de LLM, mas usam recursos locais e seus resultados também entram no contexto.
 
-O [protocolo de avaliação](references/evaluation.md) propõe comparar agente único, executor econômico fixo e política adaptativa num piloto de 30–50 tarefas. Acompanhe custo total por tarefa aceita, taxa de aceite, regressões, falsos aceites e tempo de ponta a ponta. Inclua contexto, cache, tentativas rejeitadas, revisão e integração. `Desconhecido` não equivale a custo zero.
+O [protocolo de avaliação](references/evaluation.md) propõe comparar agente único, executor econômico fixo e política adaptativa num piloto de 30–50 tarefas; `scripts/enxame-summary.ps1` agrega o registro JSONL por braço. Acompanhe custo total por tarefa aceita, taxa de aceite, regressões, falsos aceites e tempo de ponta a ponta. Inclua contexto, cache, tentativas rejeitadas, revisão e integração. `Desconhecido` não equivale a custo zero.
 
 ## Validar o projeto
 
@@ -207,9 +207,11 @@ Sem dependências de Pester ou chamadas a provedores:
 ```powershell
 pwsh -NoProfile -File ./tests/diff.Tests.ps1
 pwsh -NoProfile -File ./tests/install.Tests.ps1
+pwsh -NoProfile -File ./tests/summary.Tests.ps1
 
 powershell -NoProfile -ExecutionPolicy Bypass -File ./tests/diff.Tests.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File ./tests/install.Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File ./tests/summary.Tests.ps1
 ```
 
 Os checks do coletor cobrem repositório sem HEAD, untracked, preservação do index, escopo literal, falhas de validação, baseline inválido e hash de conteúdo binário. Os do instalador cobrem destinos, perfil Hermes personalizado, hashes, backup, idempotência, `-WhatIf` e rejeição de junctions. O [workflow](.github/workflows/checks.yml) executa os scripts no Windows com as duas versões de PowerShell.
@@ -226,6 +228,7 @@ enxame/
 ├── templates/               # Quatro SOPs de execução/revisão
 ├── scripts/
 │   ├── enxame-diff.ps1       # Coleta e evidência do snapshot
+│   ├── enxame-summary.ps1    # Resumo do piloto (JSONL) por braço
 │   └── install.ps1           # Instalação local com backup e hashes
 ├── tests/                   # Regressões sem dependências externas
 ├── assets/                  # Identidade visual do README

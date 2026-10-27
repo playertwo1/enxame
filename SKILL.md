@@ -24,7 +24,7 @@ Consulte apenas modelos e níveis de esforço oferecidos pelo harness atual. Nã
 - Execute validações pertinentes quando custo e ambiente permitirem. Relacione cada evidência ao snapshot exato revisado, identificando a revisão/diff e o resultado. A declaração do executor orienta a revisão; confira a evidência proporcionalmente ao risco.
 - Diferencie `PASS`, `FAIL`, `NOT_RUN`, `NEEDS_CONTEXT` e `BLOCKED`. Ausência de evidência não é aprovação nem falha. Se uma validação não puder rodar, registre motivo e impacto.
 - Revisão visual sem inspeção da interface renderizada é `NOT_RUN`. Não declare aceite visual com base apenas em código ou capturas inadequadas.
-- Use os SOPs em `templates/` para papéis delegados. Permita um ciclo de reparo no mesmo executor. Se persistir a falha, interrompa a repetição, diagnostique e escolha uma escalada explícita ou reporte o bloqueio. Nunca aprove um defeito porque o orçamento de tentativas acabou.
+- Use os SOPs em `templates/` para papéis delegados. Todo despacho leva a linha `ROTA | MOTIVO | ESCALAR SE` de [routing.md](references/routing.md). Permita um ciclo de reparo no mesmo executor; se persistir a falha, siga a escada de escalada (esforço → consulta ao coordenador → modelo maior → `BLOCKED`). Nunca aprove um defeito porque o orçamento de tentativas acabou.
 
 ## Evidência do diff
 

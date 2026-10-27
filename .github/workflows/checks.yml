@@ -18,6 +18,12 @@ jobs:
       - name: Installer - PowerShell 7
         shell: pwsh
         run: ./tests/install.Tests.ps1
+      - name: Summary - PowerShell 7
+        shell: pwsh
+        run: ./tests/summary.Tests.ps1
+      - name: Summary - Windows PowerShell 5.1
+        shell: powershell
+        run: ./tests/summary.Tests.ps1
       - name: Collector - Windows PowerShell 5.1
         shell: powershell
         run: ./tests/diff.Tests.ps1
