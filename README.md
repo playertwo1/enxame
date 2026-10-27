@@ -7,7 +7,6 @@
 <p align="center">Orquestração adaptativa para Codex, Claude Code, Hermes Agent e Antigravity.</p>
 
 <p align="center">
-  <a href="https://github.com/playertwo1/enxame/actions/workflows/checks.yml"><img src="https://github.com/playertwo1/enxame/actions/workflows/checks.yml/badge.svg" alt="Resultado dos checks automatizados"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-d4a752" alt="Licença MIT"></a>
   <img src="https://img.shields.io/badge/PowerShell-5.1%20%7C%207-3679a8" alt="Scripts para PowerShell 5.1 e 7">
 </p>
@@ -214,7 +213,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File ./tests/install.Tests.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File ./tests/summary.Tests.ps1
 ```
 
-Os checks do coletor cobrem repositório sem HEAD, untracked, preservação do index, escopo literal, falhas de validação, baseline inválido e hash de conteúdo binário. Os do instalador cobrem destinos, perfil Hermes personalizado, hashes, backup, idempotência, `-WhatIf` e rejeição de junctions. O [workflow](.github/workflows/checks.yml) executa os scripts no Windows com as duas versões de PowerShell.
+Os checks do coletor cobrem repositório sem HEAD, untracked, preservação do index, escopo literal, falhas de validação, baseline inválido e hash de conteúdo binário. Os do instalador cobrem destinos, perfil Hermes personalizado, hashes, backup, idempotência, `-WhatIf` e rejeição de junctions. Os do resumo cobrem agregação por braço, escaladas, custo desconhecido como `n/a` e JSON inválido com número da linha. Os checks rodam localmente; o [workflow](.github/workflows/checks.yml) é mantido como referência, mas não é usado.
 
 **Limites:** os checks locais não comprovam descoberta em cada aplicativo, delegação real, disponibilidade de modelos, cache ou economia. Não há validação de execução dos helpers em macOS/Linux nesta versão.
 
@@ -232,7 +231,7 @@ enxame/
 │   └── install.ps1           # Instalação local com backup e hashes
 ├── tests/                   # Regressões sem dependências externas
 ├── assets/                  # Identidade visual do README
-└── .github/workflows/       # Checks automatizados
+└── .github/workflows/       # Workflow de checks (não usado; validação local)
 ```
 
 ## Contribuir
