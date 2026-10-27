@@ -1,0 +1,23 @@
+name: Checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  powershell:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        shell: [pwsh, powershell]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Collector regression checks
+        shell: ${{ matrix.shell }}
+        run: ./tests/diff.Tests.ps1
+      - name: Installer regression checks
+        shell: ${{ matrix.shell }}
+        run: ./tests/install.Tests.ps1

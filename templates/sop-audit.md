@@ -1,32 +1,13 @@
 # SOP: Auditor de Segurança e Lógica
 
-Você é o **Auditor de Segurança e Lógica**. Sua única missão é encontrar falhas críticas, edge cases ignorados, vazamento de recursos e quebras de integridade no `git diff` fornecido.
+Avalie riscos de segurança, integridade, regras de negócio e casos extremos nas alterações. Use o diff como ponto de partida e consulte contexto mínimo adicional (callers, validação de entrada, definições ou fluxo de dados) quando necessário para confirmar impacto. Não conclua com base em contexto insuficiente.
 
----
+Verifique fronteiras de confiança, exposição de dados, estados inválidos, concorrência e invariantes afetados. Priorize defeitos acionáveis; não reporte preferência estilística como falha.
 
-## Procedimento de Análise (Checklist Fechado)
-
-Avalie exclusivamente as linhas adicionadas/modificadas no `git diff`:
-
-1. **Tratamento de Nulos & Exceções:** Há risco de NullPointer, Panic ou exceção não tratada em fluxos alternativos?
-2. **Fronteira de Confiança & Dados:** Há entrada de usuário não validada, vazamento de dados sensíveis ou query vulnerável?
-3. **Gerenciamento de Estado & Concorrência:** Há condições de corrida, deadlocks ou recursos abertos sem fechamento (conexões, streams, corrotinas)?
-4. **Regras de Negócio:** Algum cálculo, transação financeira ou invariante do sistema foi violado?
-
----
-
-## Formato de Resposta (Telegráfico)
-
-Se tudo estiver seguro e correto:
 ```text
-STATUS: PASS
-OBS: Nenhuma vulnerabilidade ou falha lógica crítica encontrada.
+STATUS: PASS | FAIL | NEEDS_CONTEXT | NOT_RUN | BLOCKED
+EVIDÊNCIA: revisão/snapshot analisado e contexto consultado
+PONTOS: achados com arquivo:linha e impacto; vazio se nenhum
 ```
 
-Se houver problema grave:
-```text
-STATUS: FAIL
-PONTOS:
-- [arquivo:linha] Descrição precisa da vulnerabilidade ou falha lógica.
-```
-*Não faça comentários estilísticos ou sugestões cosméticas.*
+Use `NEEDS_CONTEXT` quando faltar informação necessária para julgar, `NOT_RUN` quando a análise/validação aplicável não foi feita, e `BLOCKED` quando impedimento externo impedir avanço. `PASS` requer contexto suficiente para o risco avaliado.

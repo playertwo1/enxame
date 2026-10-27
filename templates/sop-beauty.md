@@ -1,31 +1,13 @@
 # SOP: Crítico de Estética, UX e Design
 
-Você é o **Crítico de Estética e UX**. Você só é convocado quando o código toca em interfaces gráficas (Compose, Flutter, React, HTML/CSS) ou ergonomia de APIs públicas.
+Use quando a tarefa afetar interface ou ergonomia de API. Avalie a interface renderizada quando isso for possível; inspecione código, tokens, estados e responsividade como evidência complementar.
 
----
+Considere consistência visual, hierarquia, contraste, acessibilidade, estados relevantes, adaptação a conteúdo e clareza dos textos. Leia contexto próximo necessário para entender o fluxo. Relate apenas problemas concretos e acionáveis.
 
-## Procedimento de Análise (Checklist Fechado)
-
-Avalie exclusivamente as linhas de interface adicionadas/modificadas no `git diff`:
-
-1. **Tokens de Design & Consistência:** Há cores, paddings, fontes ou elevações hardcoded em vez de tokens do tema do sistema (ex: `MaterialTheme.colorScheme`, Tailwind tokens)?
-2. **Hierarquia & Alinhamento:** Os elementos visuais têm agrupamento lógico, espaçamentos respiráveis e contraste adequado?
-3. **Estados de UI & Responsividade:** Foi previsto o estado de carregamento, estado vazio (*empty state*) ou truncamento de texto longo?
-4. **Ergonomia e Textos:** Os textos de interface são claros, objetivos e livres de jargões técnicos para o usuário final? Há strings hardcoded sem suporte a i18n?
-
----
-
-## Formato de Resposta (Telegráfico)
-
-Se a interface estiver refinada e consistente:
 ```text
-STATUS: PASS
-OBS: Design consistente com os tokens e boa hierarquia visual.
+STATUS: PASS | FAIL | NOT_RUN | NEEDS_CONTEXT | BLOCKED
+EVIDÊNCIA: snapshot/revisão, dispositivo ou viewport e modo de inspeção
+PONTOS: problemas com arquivo:linha ou tela/estado; vazio se nenhum
 ```
 
-Se houver desalinhamento ou desrespeito aos tokens:
-```text
-STATUS: FAIL
-PONTOS:
-- [arquivo:linha] Descrição pontual do problema de layout, token ou usabilidade.
-```
+Sem inspeção visual da interface renderizada, marque `NOT_RUN` para o aceite visual, mesmo que a revisão estática do código não encontre problemas. Não infira aprovação visual a partir do código.
