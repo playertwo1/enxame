@@ -15,6 +15,10 @@ Use **econômico** para trabalho mecânico e escopo pequeno; **intermediário** 
 
 Mantenha limites de concorrência e circuit breaker do `SKILL.md`. Delegação falhou ou não está disponível? Faça o trabalho sem agentes e registre `delegação: direta`.
 
+## Perfil efetivo do Hermes
+
+`~/.hermes/skills` é o destino padrão do instalador, mas o Hermes pode usar um home personalizado ou uma distribuição Windows em `%LOCALAPPDATA%/hermes`. Consulte `hermes config path` e use `scripts/install.ps1 -Target Hermes -HermesHome <pasta-da-configuração>`. Para um perfil nomeado, consulte `hermes -p <perfil> config path` antes de instalar. Confira a descoberta com `hermes skills list --source local` no mesmo perfil. Copiar arquivos para o home portátil não prova que um perfil diferente os carregue.
+
 ## Descoberta Antigravity
 
 Google documenta `~/.gemini/config/skills/<skill>/` para App e IDE; CLI usa `~/.gemini/antigravity-cli/skills/<skill>/`. A documentação do IDE ainda suporta o caminho legado `~/.gemini/antigravity/skills/<skill>/`. O instalador grava no caminho global atual e no legado para compatibilidade; não instala no caminho CLI.

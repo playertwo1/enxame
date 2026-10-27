@@ -47,6 +47,9 @@ try {
         Assert (Test-Path -LiteralPath (Join-Path $destination 'SKILL.md')) "install $destination"
         Assert ((Get-FileHash (Join-Path $repo 'SKILL.md')).Hash -eq (Get-FileHash (Join-Path $destination 'SKILL.md')).Hash) "hash $destination"
     }
+    $customHermes = Join-Path $temp 'hermes-active-profile'
+    & (Join-Path $repo 'scripts\install.ps1') -Target Hermes -HomePath $profileHome -HermesHome $customHermes -Confirm:$false | Out-Null
+    Assert ((Get-FileHash (Join-Path $repo 'SKILL.md')).Hash -eq (Get-FileHash (Join-Path $customHermes 'skills\enxame\SKILL.md')).Hash) 'custom Hermes profile'
     $original = Join-Path $destinations[0] 'SKILL.md'
     Set-Content -LiteralPath $original -Value 'user version'
     Set-Content -LiteralPath (Join-Path $repo 'SKILL.md') -Value 'fixture v2'

@@ -61,6 +61,13 @@ Escolha um agente com `-Target Codex`, `Claude`, `Hermes` ou `Antigravity`. Se a
 
 O instalador copia somente a skill e seus recursos de execução. Não copia `.git`, testes ou imagens do README e não altera configurações de provedores. Antes de atualizar um destino existente, guarda sua cópia completa em `~/.enxame-backups/<execução>/<agente>/`. Confere SHA-256 dos arquivos copiados, preserva arquivos extras e retorna `UNCHANGED` quando o payload já coincide. Junctions e links de redirecionamento são recusados para evitar escrita fora dos destinos esperados.
 
+**Hermes com perfil personalizado ou instalação Windows:** o diretório efetivo pode ser diferente de `~/.hermes`, por exemplo `%LOCALAPPDATA%/hermes`. Consulte o próprio CLI e informe o diretório encontrado; isso não altera o perfil ativo:
+
+```powershell
+$hermesHome = Split-Path -Parent (hermes config path)
+./scripts/install.ps1 -Target Hermes -HermesHome $hermesHome
+```
+
 **Recarregue as skills ou abra uma nova sessão do agente.** Instalação por arquivos não comprova descoberta ou execução dentro do aplicativo. O [guia por harness](references/harnesses.md) explica as diferenças, incluindo o caminho separado do Antigravity CLI, que este instalador não configura.
 
 Para atualizar, faça `git pull --ff-only` no clone e execute o instalador novamente. Para restaurar uma instalação anterior, feche a sessão afetada e restaure a pasta daquele agente a partir do backup correspondente; os backups ficam fora dos diretórios de descoberta de skills.
@@ -205,7 +212,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File ./tests/diff.Tests.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File ./tests/install.Tests.ps1
 ```
 
-Os checks do coletor cobrem repositório sem HEAD, untracked, preservação do index, escopo literal, falhas de validação, baseline inválido e hash de conteúdo binário. Os do instalador cobrem destinos, hashes, backup, idempotência, `-WhatIf` e rejeição de junctions. O [workflow](.github/workflows/checks.yml) executa os scripts no Windows com as duas versões de PowerShell.
+Os checks do coletor cobrem repositório sem HEAD, untracked, preservação do index, escopo literal, falhas de validação, baseline inválido e hash de conteúdo binário. Os do instalador cobrem destinos, perfil Hermes personalizado, hashes, backup, idempotência, `-WhatIf` e rejeição de junctions. O [workflow](.github/workflows/checks.yml) executa os scripts no Windows com as duas versões de PowerShell.
 
 **Limites:** os checks locais não comprovam descoberta em cada aplicativo, delegação real, disponibilidade de modelos, cache ou economia. Não há validação de execução dos helpers em macOS/Linux nesta versão.
 

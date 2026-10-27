@@ -10,14 +10,17 @@ permissions:
 jobs:
   powershell:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        shell: [pwsh, powershell]
     steps:
       - uses: actions/checkout@v4
-      - name: Collector regression checks
-        shell: ${{ matrix.shell }}
+      - name: Collector - PowerShell 7
+        shell: pwsh
         run: ./tests/diff.Tests.ps1
-      - name: Installer regression checks
-        shell: ${{ matrix.shell }}
+      - name: Installer - PowerShell 7
+        shell: pwsh
+        run: ./tests/install.Tests.ps1
+      - name: Collector - Windows PowerShell 5.1
+        shell: powershell
+        run: ./tests/diff.Tests.ps1
+      - name: Installer - Windows PowerShell 5.1
+        shell: powershell
         run: ./tests/install.Tests.ps1

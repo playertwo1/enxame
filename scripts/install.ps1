@@ -2,7 +2,8 @@
 param(
     [ValidateSet('Codex', 'Claude', 'Hermes', 'Antigravity', 'All')]
     [string]$Target = 'All',
-    [string]$HomePath = $HOME
+    [string]$HomePath = $HOME,
+    [string]$HermesHome = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -35,7 +36,8 @@ if (-not ($payload | Where-Object { $_.FullName -eq (Join-Path $sourceRoot 'SKIL
 $destinations = @{}
 if ($Target -in @('Codex', 'All')) { $destinations.Codex = Join-Path $HomePath ".codex\skills\$skillName" }
 if ($Target -in @('Claude', 'All')) { $destinations.Claude = Join-Path $HomePath ".claude\skills\$skillName" }
-if ($Target -in @('Hermes', 'All')) { $destinations.Hermes = Join-Path $HomePath ".hermes\skills\$skillName" }
+if (-not $HermesHome) { $HermesHome = Join-Path $HomePath '.hermes' }
+if ($Target -in @('Hermes', 'All')) { $destinations.Hermes = Join-Path $HermesHome "skills\$skillName" }
 if ($Target -in @('Antigravity', 'All')) {
     $destinations.Antigravity = Join-Path $HomePath ".gemini\config\skills\$skillName"
     $destinations.AntigravityLegacy = Join-Path $HomePath ".gemini\antigravity\skills\$skillName"
