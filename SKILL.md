@@ -16,9 +16,15 @@ Considere separadamente: **delegação** (solo ou agentes), **modelo**, **esfor�
 
 Consulte apenas modelos e níveis de esforço oferecidos pelo harness atual. Não use catálogos fixos nem faça fallback silencioso se uma opção estiver indisponível: escolha uma alternativa disponível explicitamente ou prossiga solo, registrando a decisão quando relevante.
 
+## Abelha Rainha
+
+Ao usar esta skill, a sessão principal assume o papel de **Abelha Rainha** (o coordenador/planejador citado nas referências). Não a despache como subagente: ela precisa lançar os workers e ver a evidência de cada um.
+
+A Rainha **planeja** (escopo, riscos, critérios de aceite), **divide** em partes com fronteira de arquivos e resultado verificável, e **despacha** makers e auditores com os SOPs em `templates/`. Ela mesma integra, decide e devolve ao usuário apenas o relatório consolidado de [sop-rainha.md](templates/sop-rainha.md). Dividir é uma decisão, não uma obrigação: quando não compensar, a Rainha executa solo.
+
 ## Execução e revisão
 
-- Identifique o dono do plano e dê a cada worker um escopo de arquivos e resultado verificável. O planejador mantém a responsabilidade por integração e decisão final. Limite padrão: no máximo 2 workers; use menos ou nenhum quando a divisão não compensar.
+- A Rainha dá a cada worker um escopo de arquivos e resultado verificável, e mantém a responsabilidade por integração e decisão final. Limite padrão: no máximo 2 workers; use menos ou nenhum quando a divisão não compensar.
 - Trabalhe primeiro a partir do diff e dos caminhos afetados. Leia callers, definições, testes, fixtures ou contexto adicional sob demanda sempre que forem necessários para compreender comportamento, contrato, segurança ou compatibilidade. Diff não substitui contexto relevante.
 - Preserve a autorização que o usuário já concedeu. Delegação não amplia escopo nem permissões.
 - Execute validações pertinentes quando custo e ambiente permitirem. Relacione cada evidência ao snapshot exato revisado, identificando a revisão/diff e o resultado. A declaração do executor orienta a revisão; confira a evidência proporcionalmente ao risco.
