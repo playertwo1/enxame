@@ -170,12 +170,13 @@ O hash inclui os binários; seu payload é omitido da saída textual e exige ins
 
 | Papel | Quando usar | Procedimento |
 |---|---|---|
+| Abelha Rainha | Sempre: a sessão principal planeja, divide, despacha, integra e devolve o relatório consolidado | [SOP da Rainha](templates/sop-rainha.md) |
 | Maker | Implementação delegada e delimitada | [SOP do executor](templates/sop-maker.md) |
 | Auditor de lógica e segurança | Regras, dados e fronteiras de confiança | [SOP de auditoria](templates/sop-audit.md) |
 | Qualidade e contratos | APIs, integração e compatibilidade | [SOP de qualidade](templates/sop-quality.md) |
 | Estética e UX | Interface renderizada e comportamento visual | [SOP visual](templates/sop-beauty.md) |
 
-Convocar os quatro não é obrigatório. Uma revisão pequena pode ser feita pelo coordenador; pontos críticos justificam independência maior. `NEEDS_CONTEXT` pede informação para julgar, `BLOCKED` registra impedimento e `NOT_RUN` identifica verificação não realizada. Sem inspeção renderizada, o aceite visual permanece `NOT_RUN`.
+A Rainha não é um subagente: ela precisa lançar os workers e ver a evidência de cada um. Seu `STATUS` final nunca é melhor que o pior status relevante dos workers. Convocar os quatro workers não é obrigatório, e a Rainha pode executar solo quando dividir não compensar. Uma revisão pequena pode ser feita pela própria Rainha; pontos críticos justificam independência maior. `NEEDS_CONTEXT` pede informação para julgar, `BLOCKED` registra impedimento e `NOT_RUN` identifica verificação não realizada. Sem inspeção renderizada, o aceite visual permanece `NOT_RUN`.
 
 ## O que a pesquisa sustenta
 
@@ -224,7 +225,7 @@ enxame/
 ├── SKILL.md                 # Política comum e descoberta da skill
 ├── agents/openai.yaml       # Metadados de interface do Codex
 ├── references/              # Roteamento, harnesses e avaliação
-├── templates/               # Quatro SOPs de execução/revisão
+├── templates/               # SOPs da Rainha e dos workers
 ├── scripts/
 │   ├── enxame-diff.ps1       # Coleta e evidência do snapshot
 │   ├── enxame-summary.ps1    # Resumo do piloto (JSONL) por braço
