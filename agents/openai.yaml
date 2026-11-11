@@ -1,4 +1,0 @@
-interface:
-  display_name: "Enxame"
-  short_description: "Coordena execução e revisão de tarefas de engenharia"
-  default_prompt: "Use $enxame para planejar e executar esta tarefa com validação proporcional ao risco."
