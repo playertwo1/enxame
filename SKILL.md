@@ -38,6 +38,10 @@ Ao continuar trabalho interrompido ou compactado, trate cada checkpoint marcado 
 
 Passe objetivo, arquivos permitidos e proibidos, contrato, validação e o aviso de que há outros trabalhando e que alterações alheias não devem ser revertidas. Peça de volta status, arquivos, comando com resultado e pendências. Workers não delegam nem editam o plano.
 
+Dê ao worker uma condição de parada, por exemplo: "depois de duas tentativas que falharem, pare e relate o que tentou". Sem ela, o worker insiste até contornar o problema em vez de expô-lo.
+
+Diante de passo irreversível (migração, apagar dados, push, cobrança), o worker não executa: devolve o comando exato que pretende rodar, e o coordenador decide.
+
 Quando duas partes dependem uma da outra (ex.: API e interface que consome um campo), escreva o contrato antes de dividir: nome do campo, tipo, unidade e formato. Isso vale também se você mesmo fizer as duas partes em sequência.
 
 Na integração, releia os dois lados, confirme que usam o mesmo contrato e confira um fluxo que atravesse as partes. Testes isolados não provam integração; sem essa conferência, não declare integração.
